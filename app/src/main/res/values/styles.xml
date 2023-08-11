@@ -5,4 +5,28 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
+    <style name="MyButton">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">40dp</item>
+        <item name="android:background">@drawable/background_sign</item>
+    </style>
+    <style name="MyEdit">
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">40dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/background_input</item>
+    </style>
+    <style name="MyText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">42dp</item>
+        <item name="android:layout_marginEnd">42dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

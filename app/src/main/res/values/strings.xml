@@ -1,9 +1,17 @@
 <resources>
-    <string name="app_name">Shopping Car</string>
-    <string name="forget_your_password">forget your password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="password">Password</string>
-    <string name="mobile">Mobile</string>
-    <string name="sign_in_to_your_accent">Sign in to your accent</string>
-    <string name="welcome_back">welcome back</string>
+    <string name="app_name">购物车</string>
+    <string name="forget_your_password">忘记密码？</string>
+    <string name="sign_in">登录</string>
+    <string name="password">密码</string>
+    <string name="mobile">账号</string>
+    <string name="sign_in_to_your_accent">请登录你的账号</string>
+    <string name="welcome_back">欢迎回来</string>
+    <string name="register">没有账号？去注册</string>
+    <string name="remember_password">记住密码</string>
+    <string name="automaticLogin">自动登录</string>
+    <string name="textBegin">让我们开始购物之旅吧！</string>
+    <string name="register_to_your_accent">请注册你的账号</string>
+    <string name="ture_password">确认密码</string>
+    <string name="agree">同意用户协议</string>
+    <string name="Register">注册</string>
 </resources>
