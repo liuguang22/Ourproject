@@ -29,6 +29,7 @@ public class PersonActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PersonActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -2,6 +2,8 @@ package com.example.ourproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +28,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         cbAgree = findViewById(R.id.agree);
         btnRegister = findViewById(R.id.buttonRegister2);
 
-        btnRegister.setOnClickListener(this);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
     @Override
@@ -55,6 +64,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+        //存储账号密码
+        SharedPreferences mima = getSharedPreferences("Accent_and_password",MODE_PRIVATE);
+        SharedPreferences.Editor edit = mima.edit();
+        edit.putString("account",name);
+        edit.putString("password",pass);
+        edit.putBoolean("isRemember",true);
+
+        //数据回传
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("account",name);
+        bundle.putString("password",pass);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK,intent);
+
         Toast.makeText(RegisterActivity.this,"注册成功！",Toast.LENGTH_LONG).show();
+        this.finish();
     }
 }

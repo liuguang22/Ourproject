@@ -1,10 +1,15 @@
 package com.example.ourproject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG,"account:" + account);
                 Log.d(TAG,"password:" + password);
 
+                if(TextUtils.isEmpty(username)){
+                    Toast.makeText(LoginActivity.this,"抱歉，你还没有注册账号",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(account.equals(username)){
                     if(password.equals(pass)){
                         Toast.makeText(LoginActivity.this,"恭喜你，登录成功！",Toast.LENGTH_LONG).show();
@@ -64,16 +74,19 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"密码错误！",Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this,"账号错误或者您还没有账号！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,"账号错误！",Toast.LENGTH_LONG).show();
                 }
             }
         });
         //注册
+        ActivityResultLauncher requestDataLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            Log.d("LoginActivity",result.getData().getStringExtra("data_return"));
+        });
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+                requestDataLauncher.launch(intent);
             }
         });
     }
@@ -83,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
         boolean isRemember = mima.getBoolean("isRemember",false);
         String account = mima.getString("account","");
         String password = mima.getString("password","");
+        username = account;
+        pass = password;
         if(isRemember){
             etAccent.setText(account);
             etPassword.setText(password);
