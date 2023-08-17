@@ -18,8 +18,8 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
 
-        tvContent = findViewById(R.id.tv_welcome);
-        exit = findViewById(R.id.exit);
+        tvContent = findViewById(R.id.count);
+        exit = findViewById(R.id.button);
         Intent intent = getIntent();
         String account = intent.getStringExtra("account");
         tvContent.setText("欢迎你："+account);
