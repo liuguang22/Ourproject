@@ -1,7 +1,5 @@
 package com.example.ourproject;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +14,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
+@Deprecated
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "tag";
-    private Button btnLogin,btnRegister;
-    private EditText etAccent,etPassword;
-    private CheckBox cbRemember,cbLogin;
+    private Button btnLogin, btnRegister;
+    private EditText etAccent, etPassword;
+    private CheckBox cbRemember, cbLogin;
 
     private String username = "root";
     private String pass = "1234";
@@ -40,65 +38,66 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String account = etAccent.getText().toString();
                 String password = etPassword.getText().toString();
-                Log.d(TAG,"account:" + account);
-                Log.d(TAG,"password:" + password);
+                Log.d(TAG, "account:" + account);
+                Log.d(TAG, "password:" + password);
 
-                if(TextUtils.isEmpty(username)){
-                    Toast.makeText(LoginActivity.this,"抱歉，你还没有注册账号",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(username)) {
+                    Toast.makeText(LoginActivity.this, "抱歉，你还没有注册账号", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if(account.equals(username)){
-                    if(password.equals(pass)){
-                        Toast.makeText(LoginActivity.this,"恭喜你，登录成功！",Toast.LENGTH_LONG).show();
-                        if(cbRemember.isChecked()){
-                            SharedPreferences mima = getSharedPreferences("Accent_and_password",MODE_PRIVATE);
+                if (account.equals(username)) {
+                    if (password.equals(pass)) {
+                        Toast.makeText(LoginActivity.this, "恭喜你，登录成功！", Toast.LENGTH_LONG).show();
+                        if (cbRemember.isChecked()) {
+                            SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
                             SharedPreferences.Editor edit = mima.edit();
-                            edit.putString("account",account);
-                            edit.putString("password",password);
-                            edit.putBoolean("isRemember",true);
+                            edit.putString("account", account);
+                            edit.putString("password", password);
+                            edit.putBoolean("isRemember", true);
                             edit.apply();
                         } else {
-                            SharedPreferences mima = getSharedPreferences("Accent_and_password",MODE_PRIVATE);
+                            SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
                             SharedPreferences.Editor edit = mima.edit();
-                            edit.putBoolean("isRemember",false);
+                            edit.putBoolean("isRemember", false);
                             edit.apply();
                         }
-                        Intent intent = new Intent(LoginActivity.this,PersonActivity.class);
-                        intent.putExtra("account",account);
+                        Intent intent = new Intent(LoginActivity.this, PersonActivity.class);
+                        intent.putExtra("account", account);
                         startActivity(intent);
                         //结束事件，关闭窗口，不将在点击返回后返回
                         LoginActivity.this.finish();
 
                     } else {
-                        Toast.makeText(LoginActivity.this,"密码错误！",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "密码错误！", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this,"账号错误！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "账号错误！", Toast.LENGTH_LONG).show();
                 }
             }
         });
         //注册
         ActivityResultLauncher requestDataLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            Log.d("LoginActivity",result.getData().getStringExtra("data_return"));
+            Log.d("LoginActivity", result.getData().getStringExtra("data_return"));
         });
-        btnRegister.setOnClickListener(new View.OnClickListener(){
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 requestDataLauncher.launch(intent);
             }
         });
     }
+
     //读取存储的密码
     private void initData() {
-        SharedPreferences mima = getSharedPreferences("Accent_and_password",MODE_PRIVATE);
-        boolean isRemember = mima.getBoolean("isRemember",false);
-        String account = mima.getString("account","");
-        String password = mima.getString("password","");
+        SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
+        boolean isRemember = mima.getBoolean("isRemember", false);
+        String account = mima.getString("account", "");
+        String password = mima.getString("password", "");
         username = account;
         pass = password;
-        if(isRemember){
+        if (isRemember) {
             etAccent.setText(account);
             etPassword.setText(password);
             cbRemember.setChecked(true);

@@ -14,4 +14,5 @@
     <string name="ture_password">确认密码</string>
     <string name="agree">同意用户协议</string>
     <string name="Register">注册</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

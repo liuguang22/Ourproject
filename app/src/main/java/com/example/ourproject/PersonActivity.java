@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+@Deprecated
 public class PersonActivity extends AppCompatActivity {
 
     private TextView tvContent;
@@ -22,12 +22,12 @@ public class PersonActivity extends AppCompatActivity {
         exit = findViewById(R.id.button);
         Intent intent = getIntent();
         String account = intent.getStringExtra("account");
-        tvContent.setText("欢迎你："+account);
+        tvContent.setText("欢迎你：" + account);
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PersonActivity.this,LoginActivity.class);
+                Intent intent = new Intent(PersonActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
