@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Ourproject"
         tools:targetApi="31">
         <activity
+            android:name=".ShopCarActivity"
+            android:exported="false" />
+        <activity
             android:name=".PersonActivity"
             android:exported="false" />
         <activity android:name=".LoginActivity" />
