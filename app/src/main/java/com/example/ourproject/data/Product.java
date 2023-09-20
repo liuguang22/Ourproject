@@ -58,6 +58,4 @@ public class Product {
         this.describe = describe;
     }
 
-
-
 }
