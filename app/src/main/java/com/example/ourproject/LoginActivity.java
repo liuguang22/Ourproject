@@ -1,21 +1,21 @@
 package com.example.ourproject;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,9 +39,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnRegister;
     private EditText etAccent, etPassword;
     private CheckBox cbRemember, cbLogin;
+    private ImageView ivVisibility;
     private final Gson gson = new Gson();
     private String username = "root";
     private String pass = "1234";
+    private Boolean bPwdSwitch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +53,26 @@ public class LoginActivity extends AppCompatActivity {
         initView();
         initData();
 
+        // 密码 可见\不可见 状态
+        ivVisibility.setOnClickListener(view -> {
+            bPwdSwitch = !bPwdSwitch;
+            if(bPwdSwitch){
+                ivVisibility.setImageResource(R.drawable.baseline_visibility_24);
+                etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }else{
+                ivVisibility.setImageResource(R.drawable.baseline_visibility_off_24);
+                etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                etPassword.setTypeface(Typeface.DEFAULT);
+            }
+        });
+
         //登录
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String account = etAccent.getText().toString();
                 String password = etPassword.getText().toString();
-
+                //与后端数据对比后登录
 
             }
         });
@@ -74,17 +89,33 @@ public class LoginActivity extends AppCompatActivity {
 
     //读取存储的密码
     private void initData() {
-        SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
-        boolean isRemember = mima.getBoolean("isRemember", false);
-        String account = mima.getString("account", "");
-        String password = mima.getString("password", "");
-        username = account;
-        pass = password;
-        if (isRemember) {
+        String spFileName = getResources()
+                .getString(R.string.shared_preferences_file_name);
+        String accountKey = getResources()
+                .getString(R.string.login_account_name);
+        String passwordKey =  getResources()
+                .getString(R.string.login_password);
+        String rememberPasswordKey = getResources()
+                .getString(R.string.login_remember_password);
+
+        SharedPreferences spFile = getSharedPreferences(
+                spFileName,
+                MODE_PRIVATE);
+        String account = spFile.getString(accountKey, null);
+        String password = spFile.getString(passwordKey, null);
+        Boolean rememberPassword = spFile.getBoolean(
+                rememberPasswordKey,
+                false);
+
+        if (account != null && !TextUtils.isEmpty(account)) {
             etAccent.setText(account);
-            etPassword.setText(password);
-            cbRemember.setChecked(true);
         }
+
+        if (password != null && !TextUtils.isEmpty(password)) {
+            etPassword.setText(password);
+        }
+
+        cbRemember.setChecked(rememberPassword);
     }
 
     //控件
@@ -93,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.buttonRegister1);
         etAccent = findViewById(R.id.inputMobile1);
         etPassword = findViewById(R.id.inputPassword1);
+        ivVisibility = findViewById(R.id.iv_visibility);
         cbRemember = findViewById(R.id.Remember);
     }
 

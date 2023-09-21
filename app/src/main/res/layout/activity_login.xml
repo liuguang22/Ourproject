@@ -75,17 +75,31 @@
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/inputPassword1"
-        android:drawableEnd="@drawable/baseline_visibility_off_24"
+
+    <RelativeLayout
+        android:id="@+id/rl_Password_container"
         android:layout_width="match_parent"
-        android:hint="@string/password"
-        android:imeOptions="actionDone"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textColorHint="@color/colorTextHint"
-        style="@style/MyEdit"
-        app:layout_constraintBottom_toTopOf="@+id/checkbox"/>
+        app:layout_constraintBottom_toTopOf="@+id/checkbox"
+        style="@style/MyEdit" >
+        <EditText
+            android:id="@+id/inputPassword1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorTextHint" />
+        <ImageView
+            android:id="@+id/iv_visibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_visibility_off_24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
 
     <EditText
         android:id="@+id/inputMobile1"
@@ -96,7 +110,7 @@
         android:inputType="text"
         android:textColorHint="@color/colorTextHint"
         style="@style/MyEdit"
-        app:layout_constraintBottom_toTopOf="@+id/inputPassword1"
+        app:layout_constraintBottom_toTopOf="@+id/rl_Password_container"
         />
 
     <TextView

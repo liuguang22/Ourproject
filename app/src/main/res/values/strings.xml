@@ -14,4 +14,10 @@
     <string name="ture_password">确认密码</string>
     <string name="agree">同意用户协议</string>
     <string name="Register">注册</string>
+    <string name="shared_preferences_file_name">sp_login</string>
+    <string name="login_account_name">login_account_name</string>
+    <string name="login_password">login_password</string>
+    <string name="login_confirmpassword">login_confirmpassword</string>
+    <string name="login_remember_password">login_remember_password</string>
+    login_password
 </resources>

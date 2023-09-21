@@ -41,7 +41,6 @@
 
     <EditText
         android:id="@+id/inputPassword2"
-        android:drawableEnd="@drawable/baseline_visibility_off_24"
         android:layout_width="match_parent"
         android:background="@drawable/background_input"
         android:hint="@string/password"
@@ -54,7 +53,6 @@
 
     <EditText
         android:id="@+id/turePassword"
-        android:drawableEnd="@drawable/baseline_visibility_off_24"
         android:layout_width="match_parent"
         android:hint="@string/ture_password"
         android:imeOptions="actionDone"

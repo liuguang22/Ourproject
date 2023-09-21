@@ -3,6 +3,7 @@ package com.example.ourproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,30 +56,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        //密码明文暗文切换
-//        ivPwdSwitch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                bPwdSwitch = !bPwdSwitch;
-//                if (bPwdSwitch) {
-//                    ivPwdSwitch.setImageResource(
-//                            R.drawable.baseline_visibility_24);
-//                    etPass.setInputType(
-//                            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-//                } else {
-//                    ivPwdSwitch.setImageResource(
-//                            R.drawable.baseline_visibility_off_24);
-//                    etPass.setInputType(
-//                            InputType.TYPE_TEXT_VARIATION_PASSWORD |
-//                                    InputType.TYPE_CLASS_TEXT);
-//                    etPass.setTypeface(Typeface.DEFAULT);
-//                }
-//            }
-//        });
-
     }
     private void interview(){
-//        final ImageView ivPwdSwitch = findViewById(R.id.iv_pwd_switch);
         etAccount = findViewById(R.id.inputMobile2);
         etPass = findViewById(R.id.inputPassword2);
         etPassConfirm = findViewById(R.id.turePassword);
@@ -87,12 +66,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onClick(View v) {
-        String name = etAccount.getText().toString();
-        String pass = etPass.getText().toString();
-        String passConfirm = etPassConfirm.getText().toString();
+        //储存密码
+        String spFileName = getResources()
+                .getString(R.string.shared_preferences_file_name);
+        String accountKey = getResources()
+                .getString(R.string.login_account_name);
+        String passwordKey =  getResources()
+                .getString(R.string.login_password);
+        String PasswordConfirmKey = getResources()
+                .getString(R.string.login_confirmpassword);
+        String rememberPasswordKey = getResources()
+                .getString(R.string.login_remember_password);
 
+        SharedPreferences spFile = getSharedPreferences(
+                spFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = spFile.edit();
+        if(cbAgree.isChecked()){
+            String name = etAccount.getText().toString();
+            String pass = etPass.getText().toString();
+            String passConfirm = etPassConfirm.getText().toString();
+
+            editor.putString(accountKey,name);
+            editor.putString(passwordKey,pass);
+            editor.putString(PasswordConfirmKey,passConfirm);
+            editor.putBoolean(rememberPasswordKey,true);
+        } else {
+            editor.remove(accountKey);
+            editor.remove(passwordKey);
+            editor.remove(PasswordConfirmKey);
+            editor.remove(rememberPasswordKey);
+            editor.apply();
+        }
 
     }
+    //post请求
     private void post(){
         new Thread(() -> {
 
