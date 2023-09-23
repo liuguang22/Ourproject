@@ -19,11 +19,11 @@
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/baseline_search_24"
-            />
+            android:contentDescription="@string/todo" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,13 +31,13 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:inputType="text"
-            android:hint=""
+            android:hint="@string/seach_goods"
             android:id="@+id/select"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="32dp"
             android:textColor="@color/grey"
             android:maxLines="1"
-            />
+            tools:ignore="LabelFor" />
     </androidx.cardview.widget.CardView>
 
 

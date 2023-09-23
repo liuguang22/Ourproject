@@ -1,4 +1,6 @@
-package com.example.ourproject;
+package com.example.ourproject.Person;
+
+import com.example.ourproject.home.Record;
 
 import java.util.List;
 

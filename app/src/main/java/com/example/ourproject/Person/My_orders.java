@@ -7,8 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourproject.Bottom.Main;
-import com.example.ourproject.HomeActivity;
 import com.example.ourproject.R;
 
 public class My_orders extends AppCompatActivity implements View.OnClickListener{
@@ -27,8 +25,7 @@ public class My_orders extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         Intent intent = null;
         if(view.getId() == R.id.comeback){
-            intent = new Intent(My_orders.this, Main.class);
-            startActivity(intent);
+            finish();
         }
 
     }

@@ -26,8 +26,7 @@ public class My_collection extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         Intent intent = null;
         if(view.getId() == R.id.comeback){
-            intent = new Intent(My_collection.this, Main.class);
-            startActivity(intent);
+            finish();
         }
 
     }

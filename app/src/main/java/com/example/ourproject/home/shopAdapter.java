@@ -1,12 +1,6 @@
-package com.example.ourproject;
+package com.example.ourproject.home;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.NetworkOnMainThreadException;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.ourproject.R;
+import com.example.ourproject.home.Record;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
-
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class shopAdapter
         extends ArrayAdapter<Record> {

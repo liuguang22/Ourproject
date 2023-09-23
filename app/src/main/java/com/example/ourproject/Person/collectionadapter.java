@@ -1,4 +1,4 @@
-package com.example.ourproject;
+package com.example.ourproject.Person;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.ourproject.R;
+import com.example.ourproject.home.Record;
+
 import java.util.List;
 
 public class collectionadapter extends ArrayAdapter<Record> {

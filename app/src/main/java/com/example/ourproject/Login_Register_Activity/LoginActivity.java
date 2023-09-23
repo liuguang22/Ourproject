@@ -18,8 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.ourproject.Bottom.Main;
-import com.example.ourproject.HomeActivity;
-import com.example.ourproject.Person.PersonActivity;
 import com.example.ourproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -220,6 +218,7 @@ public class LoginActivity extends AppCompatActivity {
             ResponseBody.Data dataResponseBody = gson.fromJson(body, jsonType);
             Log.d("info", dataResponseBody.toString());
             dataResponseBody.getId();
+            dataResponseBody.getUsername();
         }
     };
 

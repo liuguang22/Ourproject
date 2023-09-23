@@ -1,4 +1,4 @@
-package com.example.ourproject;
+package com.example.ourproject.home;
 
 public class shopRequest {
     public int getNum() {

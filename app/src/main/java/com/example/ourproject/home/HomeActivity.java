@@ -1,19 +1,15 @@
-package com.example.ourproject;
+package com.example.ourproject.home;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.ourproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,14 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private shopAdapter shopAdapter = null;
+    private com.example.ourproject.home.shopAdapter shopAdapter = null;
     private RecyclerView recyclerView;
     Gson gson = new Gson();
     private static final String TAG = HomeActivity.class.getSimpleName();

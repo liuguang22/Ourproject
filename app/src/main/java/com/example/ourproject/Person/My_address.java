@@ -26,8 +26,7 @@ public class My_address extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         Intent intent = null;
         if(view.getId() == R.id.comeback){
-            intent = new Intent(My_address.this, Main.class);
-            startActivity(intent);
+            finish();
         }
 
     }

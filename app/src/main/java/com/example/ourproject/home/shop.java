@@ -1,15 +1,7 @@
-package com.example.ourproject;
+package com.example.ourproject.home;
 
-import android.graphics.Bitmap;
+import com.example.ourproject.home.Record;
 
-import androidx.annotation.NonNull;
-
-import com.google.gson.JsonArray;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 //public class shop {

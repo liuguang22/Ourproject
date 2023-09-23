@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.ourproject.HomeActivity;
+import com.example.ourproject.home.HomeActivity;
 import com.example.ourproject.Person.PersonActivity;
 import com.example.ourproject.R;
 
@@ -47,7 +47,7 @@ public class Main extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.rb_shops) {
                     mViewPager.setCurrentItem(0);
-                } else if (i == R.id.rb_shopcar) {
+                } else if (i == R.id.rb_message) {
                     mViewPager.setCurrentItem(1);
                 } else if (i == R.id.rb_me) {
                     mViewPager.setCurrentItem(2);
@@ -62,7 +62,7 @@ public class Main extends AppCompatActivity {
         mViewPager=findViewById(R.id.viewpager);
         mRadioGroup=findViewById(R.id.rg_tab);
         tab1=findViewById(R.id.rb_shops);
-        tab2=findViewById(R.id.rb_shopcar);
+        tab2=findViewById(R.id.rb_message);
         tab3=findViewById(R.id.rb_me);
 
 
@@ -74,7 +74,7 @@ public class Main extends AppCompatActivity {
         mViews.add(manager.startActivity("shops",intentItem).getDecorView());//将Activity转化为View然后放入View集合
 
 //        mViews.add(LayoutInflater.from(this).inflate(R.layout.shops,null));
-        mViews.add(LayoutInflater.from(this).inflate(R.layout.shopcar,null));
+        mViews.add(LayoutInflater.from(this).inflate(R.layout.activity_message,null));
 //        Intent intentItem2 = new Intent(getApplicationContext(),shops.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
 //        mViews.add(manager.startActivity("shops",intentItem2).getDecorView());//将Activity转化为View然后放入View集合
         Intent intentItem3 = new Intent(getApplicationContext(), PersonActivity.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
