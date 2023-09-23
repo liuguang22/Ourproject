@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/shop"
-    tools:context=".MainActivity">
+    tools:context=".Login_Register_Activity.MainActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

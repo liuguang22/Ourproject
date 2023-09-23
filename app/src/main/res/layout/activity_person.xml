@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgcolor"
-    tools:context=".PersonActivity">
+    tools:context=".Person.PersonActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/user"
@@ -75,16 +75,17 @@
         app:layout_constraintTop_toBottomOf="@id/user">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:id="@+id/my_inf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:gravity="left|center"
+            android:textColor="@drawable/colortrun"
+            android:clickable="true"
             android:text="我的消息"
-            android:textColor="@color/black"
             android:textSize="28sp" />
 
         <View
@@ -105,16 +106,17 @@
         app:layout_constraintTop_toBottomOf="@id/myorders">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="41dp"
+            android:id="@+id/my_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:gravity="left|center"
+            android:textColor="@drawable/colortrun"
             android:text="收货地址"
-            android:textColor="@color/black"
+            android:clickable="true"
             android:textSize="28sp" />
 
         <View
@@ -135,16 +137,16 @@
         app:layout_constraintTop_toBottomOf="@id/myinf">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="41dp"
+            android:id="@+id/my_collection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:gravity="left|center"
             android:text="我的收藏"
-            android:textColor="@color/black"
+            android:textColor="@drawable/colortrun"
             android:textSize="28sp" />
 
         <View
@@ -166,16 +168,17 @@
         app:layout_constraintTop_toBottomOf="@id/mycollection">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="41dp"
+            android:id="@+id/my_orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:gravity="left|center"
+            android:textColor="@drawable/colortrun"
             android:text="我的订单"
-            android:textColor="@color/black"
+            android:clickable="true"
             android:textSize="28sp" />
 
         <View

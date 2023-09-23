@@ -1,4 +1,4 @@
-package com.example.ourproject;
+package com.example.ourproject.Login_Register_Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ourproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,7 +37,7 @@ import okhttp3.Response;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     private Boolean bPwdSwitch = false;
     private Button btnRegister;
-    private EditText etAccount,etPass,etPassConfirm;
+    private EditText etAccount, etPassword,etPassConfirm;
     private CheckBox cbAgree;
     private final Gson gson = new Gson();
     @Override
@@ -45,61 +45,81 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         interview();
-        post();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        btnRegister.setOnClickListener(this);
 
     }
     private void interview(){
         etAccount = findViewById(R.id.inputMobile2);
-        etPass = findViewById(R.id.inputPassword2);
+        etPassword = findViewById(R.id.inputPassword2);
         etPassConfirm = findViewById(R.id.turePassword);
         cbAgree = findViewById(R.id.agree);
         btnRegister = findViewById(R.id.buttonRegister2);
     }
     @Override
     public void onClick(View v) {
-        //储存密码
-        String spFileName = getResources()
-                .getString(R.string.shared_preferences_file_name);
-        String accountKey = getResources()
-                .getString(R.string.login_account_name);
-        String passwordKey =  getResources()
-                .getString(R.string.login_password);
-        String PasswordConfirmKey = getResources()
-                .getString(R.string.login_confirmpassword);
-        String rememberPasswordKey = getResources()
-                .getString(R.string.login_remember_password);
+        //if(v.getId() == btnRegister.getId())
+        {
+            //储存密码
+            String spFileName = getResources()
+                    .getString(R.string.shared_preferences_file_name);
+            String accountKey = getResources()
+                    .getString(R.string.login_account_name);
+            String passwordKey =  getResources()
+                    .getString(R.string.login_password);
+            String PasswordConfirmKey = getResources()
+                    .getString(R.string.login_confirmpassword);
+            String rememberPasswordKey = getResources()
+                    .getString(R.string.login_remember_password);
 
-        SharedPreferences spFile = getSharedPreferences(
-                spFileName,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = spFile.edit();
-        if(cbAgree.isChecked()){
-            String name = etAccount.getText().toString();
-            String pass = etPass.getText().toString();
-            String passConfirm = etPassConfirm.getText().toString();
+            SharedPreferences spFile = getSharedPreferences(
+                    spFileName,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = spFile.edit();
+            if(cbAgree.isChecked()){
+                String name = etAccount.getText().toString();
+                String pass = etPassword.getText().toString();
+                String passConfirm = etPassConfirm.getText().toString();
 
-            editor.putString(accountKey,name);
-            editor.putString(passwordKey,pass);
-            editor.putString(PasswordConfirmKey,passConfirm);
-            editor.putBoolean(rememberPasswordKey,true);
-        } else {
-            editor.remove(accountKey);
-            editor.remove(passwordKey);
-            editor.remove(PasswordConfirmKey);
-            editor.remove(rememberPasswordKey);
-            editor.apply();
+                editor.putString(accountKey,name);
+                editor.putString(passwordKey,pass);
+                editor.putString(PasswordConfirmKey,passConfirm);
+                editor.putBoolean(rememberPasswordKey,true);
+                editor.apply();
+            } else {
+                editor.remove(accountKey);
+                editor.remove(passwordKey);
+                editor.remove(PasswordConfirmKey);
+                editor.remove(rememberPasswordKey);
+                editor.apply();
+            }
+            //判断账号是否为空等情况
+            if (TextUtils.isEmpty(etAccount.getText().toString())) {
+                Toast.makeText(RegisterActivity.this, "账号不能为空！", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(etPassword.getText().toString())) {
+                Toast.makeText(RegisterActivity.this, "密码不能为空！", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (!TextUtils.equals(etPassword.getText().toString(), etPassConfirm.getText().toString())) {
+                Toast.makeText(RegisterActivity.this, "密码不一致！", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (!cbAgree.isChecked()) {
+                Toast.makeText(RegisterActivity.this, "请先同意用户协议！", Toast.LENGTH_LONG).show();
+                return;
+            }
+            post();
         }
 
+
     }
+
+
     //post请求
     private void post(){
         new Thread(() -> {
@@ -117,8 +137,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             // 请求体
             // PS.用户也可以选择自定义一个实体类，然后使用类似fastjson的工具获取json串
             Map<String, Object> bodyMap = new HashMap<>();
-            bodyMap.put("password", "password");
-            bodyMap.put("username", "account");
+            bodyMap.put("password", etPassword.getText().toString());
+            bodyMap.put("username", etAccount.getText().toString());
             // 将Map转换为字符串类型加入请求体中
             String body = gson.toJson(bodyMap);
 
@@ -160,6 +180,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             // 解析json串到自己封装的状态
             ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
             Log.d("info", dataResponseBody.toString());
+            if(dataResponseBody.getCode() != 200){
+                return;
+            }
+            Intent Result = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("password",etPassword.getText().toString());
+            bundle.putString("account",etAccount.getText().toString());
+            Result.putExtra("bundle",bundle);
+            setResult(RESULT_OK,Result);
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+
         }
     };
 

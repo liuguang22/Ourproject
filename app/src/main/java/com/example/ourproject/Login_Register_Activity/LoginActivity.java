@@ -1,4 +1,4 @@
-package com.example.ourproject;
+package com.example.ourproject.Login_Register_Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.ourproject.Bottom.Main;
+import com.example.ourproject.HomeActivity;
+import com.example.ourproject.Person.PersonActivity;
+import com.example.ourproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -36,13 +40,14 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "tag";
+    public static final int INTENT_TO_REGISTE = 256;
     private Button btnLogin, btnRegister;
     private EditText etAccent, etPassword;
     private CheckBox cbRemember, cbLogin;
     private ImageView ivVisibility;
     private final Gson gson = new Gson();
-    private String username = "root";
-    private String pass = "1234";
+    private String username ;
+    private String pass ;
     private Boolean bPwdSwitch = false;
 
     @Override
@@ -72,7 +77,23 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String account = etAccent.getText().toString();
                 String password = etPassword.getText().toString();
-                //与后端数据对比后登录
+
+                if (cbRemember.isChecked()) {
+                    SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = mima.edit();
+                    edit.putString("account", account);
+                    edit.putString("password", password);
+                    edit.putBoolean("isRemember", true);
+                    edit.apply();
+                } else {
+                    SharedPreferences mima = getSharedPreferences("Accent_and_password", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = mima.edit();
+                    edit.putBoolean("isRemember", false);
+                    edit.apply();
+                }
+
+                Intent intent = new Intent(LoginActivity.this, Main.class);
+                startActivity(intent);
 
             }
         });
@@ -81,10 +102,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,INTENT_TO_REGISTE);
                 LoginActivity.this.finish();
             }
         });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == INTENT_TO_REGISTE && resultCode == RESULT_OK)
+        {
+            Bundle bundle = data.getBundleExtra("bundle");
+            etAccent.setText(bundle.getString("account"));
+            etPassword.setText(bundle.getString("password"));
+        }
     }
 
     //读取存储的密码
@@ -104,8 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         String account = spFile.getString(accountKey, null);
         String password = spFile.getString(passwordKey, null);
         Boolean rememberPassword = spFile.getBoolean(
-                rememberPasswordKey,
-                false);
+                rememberPasswordKey, false);
 
         if (account != null && !TextUtils.isEmpty(account)) {
             etAccent.setText(account);
@@ -181,62 +211,101 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onResponse(@NonNull Call call, Response response) throws IOException {
             //TODO 请求成功处理
-            Type jsonType = new TypeToken<ResponseBody<Object>>() {
+            Type jsonType = new TypeToken<ResponseBody.Data>() {
             }.getType();
             // 获取响应体的json串
             String body = response.body().string();
             Log.d("info", body);
             // 解析json串到自己封装的状态
-            ResponseBody<Object> dataResponseBody = gson.fromJson(body, jsonType);
-
+            ResponseBody.Data dataResponseBody = gson.fromJson(body, jsonType);
             Log.d("info", dataResponseBody.toString());
+            dataResponseBody.getId();
         }
     };
 
+    public static class ResponseBody {
 
-    /**
-     * http响应体的封装协议
-     *
-     * @param <T> 泛型
-     */
-    public static class ResponseBody<T> {
-
-        /**
-         * 业务响应码
-         */
-        private int code;
-        /**
-         * 响应提示信息
-         */
         private String msg;
-        /**
-         * 响应数据
-         */
-        private T data;
-
-        public ResponseBody() {
+        private int code;
+        private Data data;
+        public void setMsg(String msg) {
+            this.msg = msg;
         }
-
-        public int getCode() {
-            return code;
-        }
-
         public String getMsg() {
             return msg;
         }
 
-        public T getData() {
+        public void setCode(int code) {
+            this.code = code;
+        }
+        public int getCode() {
+            return code;
+        }
+
+        public void setData(Data data) {
+            this.data = data;
+        }
+        public Data getData() {
             return data;
         }
 
-        @NonNull
-        @Override
-        public String toString() {
-            return "ResponseBody{" +
-                    "code=" + code +
-                    ", msg='" + msg + '\'' +
-                    ", data=" + data +
-                    '}';
+
+        public static class Data {
+
+            private String appKey;
+            private String avatar;
+            private int id;
+            private int money;
+            private String password;
+            private String username;
+
+            public void setAppKey(String appKey) {
+                this.appKey = appKey;
+            }
+
+            public String getAppKey() {
+                return appKey;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setMoney(int money) {
+                this.money = money;
+            }
+
+            public int getMoney() {
+                return money;
+            }
+
+            public void setPassword(String password) {
+                this.password = password;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public String getUsername() {
+                return username;
+            }
         }
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bgcolor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/TOP_S"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <Button
+            android:id="@+id/comeback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="返回" />
+
+        <TextView
+            android:id="@+id/my_inf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/comeback"
+            android:layout_alignTop="@id/comeback"
+            android:gravity="center"
+            android:text="收货地址"
+            android:textColor="@drawable/colortrun"
+            android:textSize="28sp" />
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toBottomOf="@id/TOP_S">
+
+
+        <View
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
