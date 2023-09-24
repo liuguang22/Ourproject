@@ -3,7 +3,6 @@ package com.example.ourproject.Bottom;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ourproject.AddGoods.NewGoodsActivity;
 import com.example.ourproject.home.HomeActivity;
 import com.example.ourproject.Person.PersonActivity;
 import com.example.ourproject.R;
@@ -23,20 +23,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Main extends AppCompatActivity {
+public class bottom extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private RadioGroup mRadioGroup;
     private RadioButton tab1,tab2,tab3;
     private LocalActivityManager manager;
     private List<View> mViews;   //存放视图
+    public Long userId;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom);
-
-
+        userId = getIntent().getLongExtra("userId",0);
+        username = getIntent().getStringExtra("username");
 
         manager = new LocalActivityManager(this,true);
         manager.dispatchCreate(savedInstanceState);//必须写上这一行代码，不然会报错
@@ -47,7 +49,7 @@ public class Main extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.rb_shops) {
                     mViewPager.setCurrentItem(0);
-                } else if (i == R.id.rb_message) {
+                } else if (i == R.id.rb_addGoods) {
                     mViewPager.setCurrentItem(1);
                 } else if (i == R.id.rb_me) {
                     mViewPager.setCurrentItem(2);
@@ -62,7 +64,7 @@ public class Main extends AppCompatActivity {
         mViewPager=findViewById(R.id.viewpager);
         mRadioGroup=findViewById(R.id.rg_tab);
         tab1=findViewById(R.id.rb_shops);
-        tab2=findViewById(R.id.rb_message);
+        tab2=findViewById(R.id.rb_addGoods);
         tab3=findViewById(R.id.rb_me);
 
 
@@ -70,14 +72,18 @@ public class Main extends AppCompatActivity {
 //        manager = new LocalActivityManager(this,true);
 //        manager.dispatchCreate(savedInstanceState);//必须写上这一行代码，不然会报错
 //
-        Intent intentItem = new Intent(Main.this, HomeActivity.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
+        Intent intentItem = new Intent(bottom.this, HomeActivity.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
         mViews.add(manager.startActivity("shops",intentItem).getDecorView());//将Activity转化为View然后放入View集合
 
 //        mViews.add(LayoutInflater.from(this).inflate(R.layout.shops,null));
-        mViews.add(LayoutInflater.from(this).inflate(R.layout.activity_message,null));
-//        Intent intentItem2 = new Intent(getApplicationContext(),shops.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
-//        mViews.add(manager.startActivity("shops",intentItem2).getDecorView());//将Activity转化为View然后放入View集合
+//        mViews.add(LayoutInflater.from(this).inflate(R.layout.activity_newgoods,null));
+        Intent intentItem2 = new Intent(getApplicationContext(), NewGoodsActivity.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
+        mViews.add(manager.startActivity("rd_addGoods",intentItem2).getDecorView());//将Activity转化为View然后放入View集合
+
+
         Intent intentItem3 = new Intent(getApplicationContext(), PersonActivity.class);//这个类的第一个参数是上下文，第二个参数是你需要转化的Activity
+        intentItem3.putExtra("username",username);
+        intentItem3.putExtra("userId",userId);
         mViews.add(manager.startActivity("me",intentItem3).getDecorView());//将Activity转化为View然后放入View集合
 
 //        mViews.add(LayoutInflater.from(this).inflate(R.layout.me,null));
@@ -143,7 +149,4 @@ public class Main extends AppCompatActivity {
             return mViews.get(position);
         }
     }
-
-
 }
-

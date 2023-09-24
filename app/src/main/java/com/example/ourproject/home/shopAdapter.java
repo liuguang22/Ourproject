@@ -18,9 +18,9 @@ import java.util.List;
 public class shopAdapter
         extends ArrayAdapter<Record> {
 
-    private List<Record> data;
-    private Context context;
-    private int resourceId;
+    private final List<Record> data;
+    private final Context context;
+    private final int resourceId;
 
     public shopAdapter(Context context,
                        int resourceId, List<Record> data) {

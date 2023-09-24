@@ -61,6 +61,15 @@ public class Record {
 //    public void setImageUrlList(ArrayList<String> ImageUrlList) {
 //        this.imageUrlList=imageUrlList;
 //    }
+    private String goodsDescription;
+    private String sellerName;
+    public String getgoodsDescription() {
+        return goodsDescription;
+    }
+    public String getsellerName() {
+        return sellerName;
+    }
+
 
     public float getPrice() {
         return price;

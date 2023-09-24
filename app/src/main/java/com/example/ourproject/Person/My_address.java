@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourproject.Bottom.Main;
 import com.example.ourproject.R;
 
 public class My_address extends AppCompatActivity implements View.OnClickListener{
@@ -18,7 +17,7 @@ public class My_address extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_address);
 
-        Comeback =(Button) findViewById(R.id.comeback);
+        Comeback = findViewById(R.id.comeback);
         Comeback.setOnClickListener(this);
     }
 

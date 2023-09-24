@@ -1,12 +1,21 @@
 package com.example.ourproject.home;
 
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
+import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.ourproject.R;
@@ -19,13 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private com.example.ourproject.home.shopAdapter shopAdapter = null;
+    private shopAdapter shopAdapter = null;
     private RecyclerView recyclerView;
     Gson gson = new Gson();
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -148,32 +158,78 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    //    @Override
+//    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 //        initView();
 //        initData();
 //    }
+
+    public Bitmap stringToBitmap(String string) {
+        // 将字符串转换成Bitmap类型
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
+                    bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+
     private void initView() {
         list= findViewById(R.id.sh_list);
 
-//        list.setOnItemClickListener(
-//                new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView,
-//                                            View view, int i, long l) {
-//
-//                        Intent intent = new Intent(HomeActivity.this,
-//                                shopping.class);
-//                        Record s = adapter.getItem(i);
-//                        intent.putExtra("shops_id",
-//                                s.getId());
-////                        Log.d("id",s.getId()+"111");
-//
-//                        startActivity(intent);
-//                    }
-//                });
+        list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView,
+                                            View view, int i, long l) {
+
+                        Intent intent = new Intent(HomeActivity.this,
+                                shopping.class);
+                        Record s = adapter.getItem(i);
+                        intent.putExtra("content",
+                                s.getContent());
+                        intent.putExtra("prices",
+                                "￥"+s.getPrice());
+                        intent.putExtra("price",
+                                s.getPrice());
+                        intent.putExtra("status",
+                                s.getStatus());
+                        intent.putExtra("createtime",
+                                s.getCreateTime());
+                        intent.putExtra("username",
+                                s.getUsername());
+                        intent.putExtra("addr",
+                                s.getAddr());
+                        intent.putExtra("id",
+                                s.getId());
+                        intent.putExtra("sid",
+                                s.getTUserId());
+//                        intent.putExtra("bid",
+//                                "124");
+                        intent.putExtra("imagecode",
+                                s.getImageCode());
+                        intent.putExtra("typeid",
+                                s.getTypeId());
+                        intent.putExtra("typename",
+                                s.getTypeName());
+//                        Log.d("id",s.getImageUrlList().get(0)+"111");
+//                        Bitmap bitmap = BitmapFactory.decodeStream(
+//                                getClass().getResourceAsStream(s.getImageUrlList().get(0)+""));
+//                        Bitmap bitmap=stringToBitmap(s.getImageUrlList().get(0));
+                        intent.putExtra("image",
+                                s.getImageUrlList().get(0));
+//                        Log.d("id",s.getId()+"111");
+
+                        startActivity(intent);
+                    }
+                });
     }
     private void initData() {
         Data = new ArrayList<>();
@@ -205,12 +261,12 @@ public class HomeActivity extends AppCompatActivity {
 //                requestObj.setNum(Constants.NEWS_NUM);
                 requestObj.setPage(page);
                 String urlParams = requestObj.toString();
-                String url = "http://47.107.52.7:88/member/tran/goods/all?userId=124&=";
+                String url = "http://47.107.52.7:88/member/tran/goods/all?userId=186&=";
 
                 Headers headers = new Headers.Builder()
                         .add("Accept", "application/json, text/plain, */*")
-                        .add("appId", "48a9b33a1d3541c9a6a1ecf70529bc6c")
-                        .add("appSecret", "393466e36025ed6d44a3da4365314b94186be")
+                        .add("appId", "56f251050481428a96cab2420d1e9ce9")
+                        .add("appSecret", "368341198e42203e748358d022cb0199c314b")
                         .build();
                 Request request = new Request.Builder()
                         .url(url)
@@ -231,8 +287,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         }).start();
     }
-
-
-
 
 }

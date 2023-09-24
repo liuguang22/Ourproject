@@ -1,7 +1,6 @@
-
 package com.example.ourproject.data;
 
-public class User {
+public class image {
 
     private String msg;
     private int code;

@@ -6,7 +6,9 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorTextHint">#ECECEC</color>
-    <color name="orange">#FF5722</color>
+    <color name="orange">#FDC870</color>
     <color name="red">#FF0000</color>
     <color name="grey">#615D5D</color>
+    <color name="cradbg">#8B5DBA</color>
+
 </resources>

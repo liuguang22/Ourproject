@@ -1,28 +1,27 @@
 package com.example.ourproject.Person;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+
 import com.example.ourproject.R;
 import com.example.ourproject.home.Record;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class collectionadapter extends ArrayAdapter<Record> {
+public class orderadapter extends ArrayAdapter<Record> {
 
 
     private List<Record> data;
     private Context context;
     private int resourceId;
 
-    public collectionadapter(Context context,
-                             int resourceId, List<Record> data) {
+    public orderadapter(Context context,
+                        int resourceId, List<Record> data) {
         super(context, resourceId, data);
 
         this.context = context;
@@ -47,30 +46,46 @@ public class collectionadapter extends ArrayAdapter<Record> {
             vh = new ViewHolder();
             vh.ivPrice = view.findViewById(R.id.tv_price);
             vh.ivTitle = view.findViewById(R.id.tv_title);
-            vh.ivImage = view.findViewById(R.id.iv_image);
+            vh.ivCtime = view.findViewById(R.id.Ctime);
+            vh.ivSeller = view.findViewById(R.id.seller);
+            //vh.ivImage = view.findViewById(R.id.iv_image);
 
             view.setTag(vh);
         } else {
             view = convertView;
             vh = (ViewHolder) view.getTag();
         }
+//        Log.d("1","23423434234343423243");
 
-        if (sh.getImageUrlList() != null && sh.getImageUrlList().size() > 0) {
+//        if (sh.getImageUrlList() != null && sh.getImageUrlList().size() > 0) {
+//
+//            Glide.with(context)
+//                    .load(sh.getImageUrlList().get(0))
+//                    .into(vh.ivImage);
+//            //Log.d("1","23423434234343423243");
+//        }
+        vh.ivTitle.setText("详情："+sh.getgoodsDescription());
+        vh.ivPrice.setText("价格："+sh.getPrice() + "");
+        vh.ivCtime.setText(getCurrentTime(sh.getCreateTime()));
+        vh.ivSeller.setText("卖家："+sh.getsellerName());
 
-            Glide.with(context)
-                    .load(sh.getImageUrlList().get(0))
-                    .into(vh.ivImage);
-        }
-        vh.ivTitle.setText(sh.getContent());
-        vh.ivPrice.setText(sh.getPrice() + "");
 
         return view;
     }
 
+    public String getCurrentTime(long dates) {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时mm分ss秒");
+        String date = sDateFormat.format(new Date(dates));
+        return date;
+    }
+
     class ViewHolder {
         TextView ivTitle;
-        ImageView ivImage;
+        //ImageView ivImage;
         TextView ivPrice;
+        TextView ivSeller;
+        TextView ivCtime;
 
     }
+
 }

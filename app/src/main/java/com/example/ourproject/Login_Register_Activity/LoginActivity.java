@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.NetworkOnMainThreadException;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -16,8 +17,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.ourproject.Bottom.Main;
+import com.example.ourproject.Bottom.bottom;
 import com.example.ourproject.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,15 +46,14 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox cbRemember, cbLogin;
     private ImageView ivVisibility;
     private final Gson gson = new Gson();
-    private String username ;
-    private String pass ;
+    public static String username ;
+    public static String pass ;
     private Boolean bPwdSwitch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        post();
         initView();
         initData();
 
@@ -89,10 +90,18 @@ public class LoginActivity extends AppCompatActivity {
                     edit.putBoolean("isRemember", false);
                     edit.apply();
                 }
+                if (TextUtils.isEmpty(account)) {
+                    // 用户名为空
+                    Toast.makeText(LoginActivity.this, "账号为空", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-                Intent intent = new Intent(LoginActivity.this, Main.class);
-                startActivity(intent);
-
+                if (TextUtils.isEmpty(password)) {
+                    // 密码为空
+                    Toast.makeText(LoginActivity.this, "密码为空", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                post();
             }
         });
         //注册
@@ -145,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
 
         cbRemember.setChecked(rememberPassword);
     }
+
 
     //控件
     private void initView() {
@@ -209,16 +219,24 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onResponse(@NonNull Call call, Response response) throws IOException {
             //TODO 请求成功处理
-            Type jsonType = new TypeToken<ResponseBody.Data>() {
+            Type jsonType = new TypeToken<ResponseBody>() {
             }.getType();
             // 获取响应体的json串
             String body = response.body().string();
             Log.d("info", body);
             // 解析json串到自己封装的状态
-            ResponseBody.Data dataResponseBody = gson.fromJson(body, jsonType);
+            ResponseBody dataResponseBody = gson.fromJson(body, jsonType);
             Log.d("info", dataResponseBody.toString());
-            dataResponseBody.getId();
-            dataResponseBody.getUsername();
+            if(dataResponseBody.getCode() == 200){
+                Intent intent = new Intent(LoginActivity.this, bottom.class);
+                intent.putExtra("username",dataResponseBody.getData().getUsername());
+                intent.putExtra("userId",dataResponseBody.getData().getId());
+                startActivity(intent);
+            }
+            else{
+                Looper.prepare();
+                Toast.makeText(LoginActivity.this,dataResponseBody.getMsg(),Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
@@ -253,7 +271,7 @@ public class LoginActivity extends AppCompatActivity {
 
             private String appKey;
             private String avatar;
-            private int id;
+            private long id;
             private int money;
             private String password;
             private String username;
@@ -274,11 +292,11 @@ public class LoginActivity extends AppCompatActivity {
                 return avatar;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 

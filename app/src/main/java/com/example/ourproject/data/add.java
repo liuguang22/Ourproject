@@ -1,7 +1,7 @@
 
 package com.example.ourproject.data;
 
-public class User {
+public class add {
 
     private String msg;
     private int code;

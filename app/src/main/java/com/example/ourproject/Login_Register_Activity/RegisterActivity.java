@@ -35,7 +35,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
-    private Boolean bPwdSwitch = false;
+    private final Boolean bPwdSwitch = false;
     private Button btnRegister;
     private EditText etAccount, etPassword,etPassConfirm;
     private CheckBox cbAgree;

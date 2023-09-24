@@ -3,7 +3,7 @@ package com.example.ourproject.data;
 import java.util.List;
 
 public class Order {
-    private List<Product> products;
+    private final List<Product> products;
     private double totalPrice;
 
     public Order(List<Product> products) {

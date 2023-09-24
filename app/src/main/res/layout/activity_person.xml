@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/count"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentStart="true"
@@ -53,9 +53,10 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/userId"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_below="@+id/count"
+            android:layout_below="@+id/username"
             android:layout_alignParentStart="true"
 
             android:layout_marginStart="1dp"
@@ -197,9 +198,10 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        style="@style/MyButton"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="50dp"
         android:text="@string/exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

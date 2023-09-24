@@ -28,7 +28,7 @@
     <string name="home">首页</string>
     <string name="seach_goods">请输入想要搜索的商品名称</string>
 
-    <string name="message">消息</string>
+    <string name="addGoods">添加商品</string>
 
     <string name="my">我的</string>
     <string name="username">用户昵称：</string>
@@ -42,6 +42,12 @@
 
     <string name="todo">TODO</string>
     <string name="number">数量</string>
+    <string name="product_name">商品名称</string>
+    <string name="product_describe">商品描述</string>
+    <string name="product_price">商品价格</string>
+    <string name="product_picture">商品图片:</string>
+    <string name="load_up">来发布你的商品吧</string>
+    <string name="up">发布</string>
 
 
 </resources>

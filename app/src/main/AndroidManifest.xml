@@ -33,7 +33,7 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
         </activity>
-        <activity android:name=".Bottom.Main"
+        <activity android:name=".Bottom.bottom"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -48,6 +48,8 @@
         <activity android:name=".Person.My_orders" />
         <activity android:name=".Login_Register_Activity.LoginActivity" />
         <activity android:name=".Login_Register_Activity.RegisterActivity" />
+        <activity android:name=".AddGoods.NewGoodsActivity"/>
+        <activity android:name=".home.shopping"/>
         <activity
             android:name=".Login_Register_Activity.MainActivity"
             android:exported="true">

@@ -20,14 +20,17 @@
         android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:layout_gravity="center"
+        style="@style/MyButton"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         />
     <Button
         android:id="@+id/sign_up"
+        style="@style/MyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
