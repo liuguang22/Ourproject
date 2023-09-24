@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:background="@drawable/background_sign"
+            android:textColor="@color/black"
+            android:id="@+id/un_fh"
+            android:text="返回"/>
+
+
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/un_title"
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/un_image"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/un_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:gravity="right"
+            android:textColor="@color/red"
+            android:textSize="25sp"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            />
+
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/un_mj"
+            android:paddingTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <!--            <TextView-->
+        <!--                style="@style/TextAppearance.AppCompat.Subhead"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:id="@+id/xq_ct"-->
+        <!--                android:paddingTop="8dp"-->
+        <!--                android:paddingStart="8dp"-->
+        <!--                android:paddingBottom="4dp"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textSize="30sp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                />-->
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/un_dz"
+            android:paddingTop="8dp"
+            android:paddingStart="18dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <RadioGroup
+        android:id="@+id/un_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+
+            android:background="@color/orange"
+            android:id="@+id/un_sc"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:textSize="30sp"
+            android:textColor="@color/grey"
+            android:text="取消收藏" />
+
+
+        <RadioButton
+            android:id="@+id/un_buy"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:textSize="36sp"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:text="立即购买" />
+
+    </RadioGroup>
+
+</RelativeLayout>
